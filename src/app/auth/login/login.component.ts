@@ -5,7 +5,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
-import { LayoutService } from '@app/shared/app.layout.service';
+import { LayoutService } from '@app/core/services/app.layout.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,9 +23,22 @@ import { LayoutService } from '@app/shared/app.layout.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  valCheck: string[] = ['remember'];
-
   password!: string;
+  username!: string;
 
-  constructor(public layoutService: LayoutService) { }
+  constructor(public layoutService: LayoutService, public router: Router) { }
+
+  login() {
+        
+    if (this.username == "666666" && this.password == "123456") {
+        let user = {
+            username: this.username,
+            password: this.password
+        };
+        localStorage.setItem("user", JSON.stringify(user));
+        this.router.navigate(["dashboard"]);
+    }else{
+        console.log("asdasdasd");
+    }
+  }
 }
