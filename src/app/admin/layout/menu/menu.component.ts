@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from '@app/core/services/app.layout.service';
-import { MenuItemComponent } from '../menu-item/menu-item.component';
-
+import { MenuitemComponent } from '../menuitem/menuitem.component';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule,MenuItemComponent],
+  imports: [CommonModule,MenuitemComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit{
 
   model: any[] = [];
 
-  constructor(public layoutService: LayoutService) { }
+  constructor(public layoutService: LayoutService,private primengConfig: PrimeNGConfig) { }
 
   ngOnInit() {
       this.model = [

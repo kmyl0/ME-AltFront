@@ -1,18 +1,25 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { MenuService } from '@app/core/services/admin.layout.menu.service';
 import { LayoutService } from '@app/core/services/app.layout.service';
-import { Subscription, filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
-  selector: 'app-menu-item',
+  selector: '[app-menuitem]',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './menu-item.component.html',
-  styleUrl: './menu-item.component.scss',
+  imports: [CommonModule
+  ,MenuComponent
+  ,MenuitemComponent 
+],
+  styleUrl: './menuitem.component.scss',
   animations: [
     trigger('children', [
         state('collapsed', style({
@@ -25,7 +32,7 @@ import { CommonModule } from '@angular/common';
     ])
 ]
 })
-export class MenuItemComponent implements OnInit, OnDestroy {
+export class MenuitemComponent implements OnInit, OnDestroy {
 
   @Input() item: any;
 
