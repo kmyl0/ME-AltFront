@@ -13,9 +13,12 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { ToastModule } from 'primeng/toast';
 import { SliderModule } from 'primeng/slider';
 import { RatingModule } from 'primeng/rating';
+import { PeriodoService } from '@app/core/services/periodo.service';
+import { Observable } from 'rxjs';
+import { PeriodoResults } from '@app/core/models/periodo';
 
 @Component({
-  selector: 'app-gestion',
+  selector: 'app-periodo',
   standalone: true,
   imports: [
     CommonModule,
@@ -33,34 +36,39 @@ import { RatingModule } from 'primeng/rating';
 		ToastModule
     
   ],
-  templateUrl: './gestion.component.html',
-  styleUrl: './gestion.component.scss'
+  templateUrl: './periodo.component.html',
+  styleUrl: './periodo.component.scss'
 })
-export class GestionComponent implements OnInit{
+export class PeriodoComponent implements OnInit{
   customers1:any[] = [];
   representatives:any[] = [];
   statuses: any[] = [];
 
   @ViewChild('filter') filter!: ElementRef;
 
-  constructor() { }
-  ngOnInit() {
+  public periodoList$!:Observable<PeriodoResults>;
+
+  constructor(private periodoService:PeriodoService) { }
+  
+  
+  ngOnInit():void{
+
+    this.periodoList$ = this.periodoService.getPeriodosList();
+    
+    this.periodoList$.subscribe(result => {console.log(result,typeof(result))});
+
+
+
+
     this.customers1=[
-      {name:'asda',country:'dfgdfg'},
+      {name:'aaaaa',date:'11/11/2021',status:'unqualified',balance:'101',area:'adadasdasd'},
+      {name:'bbbb',date:'11/11/2021',status:'qualified',balance:'101',area:'adadasdasd'},
+      {name:'cccc',date:'11/11/2021',status:'new',balance:'101',area:'adadasdasd'},
+      {name:'dddd',date:'11/11/2021',status:'negotiation',balance:'101',area:'adadasdasd'},
+      {name:'eeee',date:'11/11/2021',status:'renewal',balance:'101',area:'adadasdasd'},
+      {name:'ffff',date:'11/11/2021',status:'proposal',balance:'101',area:'adadasdasd'},
     ];
 
-    this.representatives = [
-        { name: 'Amy Elsner', image: 'amyelsner.png' },
-        { name: 'Anna Fali', image: 'annafali.png' },
-        { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
-        { name: 'Bernardo Dominic', image: 'bernardodominic.png' },
-        { name: 'Elwin Sharvill', image: 'elwinsharvill.png' },
-        { name: 'Ioni Bowcher', image: 'ionibowcher.png' },
-        { name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png' },
-        { name: 'Onyama Limba', image: 'onyamalimba.png' },
-        { name: 'Stephen Shaw', image: 'stephenshaw.png' },
-        { name: 'XuXue Feng', image: 'xuxuefeng.png' }
-    ];
 
     this.statuses = [
         { label: 'Unqualified', value: 'unqualified' },

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router} from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -7,17 +7,10 @@ import { MenuService } from '@app/core/services/admin.layout.menu.service';
 import { LayoutService } from '@app/core/services/app.layout.service';
 import { CommonModule } from '@angular/common';
 
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { MenuComponent } from '../menu/menu.component';
-
 @Component({
   selector: '[app-menuitem]',
   standalone: true,
   imports: [CommonModule
-  ,MenuComponent
-  ,MenuitemComponent 
 ],
   styleUrl: './menuitem.component.scss',
   animations: [
