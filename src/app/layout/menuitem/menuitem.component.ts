@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router} from '@angular/router';
+import { NavigationEnd, Router, RouterLink,RouterLinkActive} from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -7,11 +7,15 @@ import { MenuService } from '@app/core/services/admin.layout.menu.service';
 import { LayoutService } from '@app/core/services/app.layout.service';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: '[app-menuitem]',
   standalone: true,
-  imports: [CommonModule
+  imports: [CommonModule,
+    RouterLink,
+    RouterLinkActive
 ],
+templateUrl: './menuitem.component.html',
   styleUrl: './menuitem.component.scss',
   animations: [
     trigger('children', [
@@ -56,20 +60,20 @@ export class MenuitemComponent implements OnInit, OnDestroy {
               }
           });
       });
-
+    
       this.menuResetSubscription = this.menuService.resetSource$.subscribe(() => {
           this.active = false;
-      });
-
-      this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-          .subscribe(params => {
-              if (this.item.routerLink) {
-                  this.updateActiveStateFromRoute();
-              }
-          });
+      }); 
   }
 
   ngOnInit() {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe(params => {
+            if (this.item.routerLink) {
+                this.updateActiveStateFromRoute();
+            }
+        });
+
       this.key = this.parentKey ? this.parentKey + '-' + this.index : String(this.index);
 
       if (this.item.routerLink) {

@@ -37,6 +37,7 @@
 							<i class="pi pi-search"></i>
 							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
 						</span>
+						<button pButton pRipple label="Establecer fechas generales" icon="pi pi-save" class="p-button-success p-button-sm mr-2 mb-2"></button>
 					</div>
 				</ng-template>
 				<ng-template pTemplate="header">
@@ -106,7 +107,7 @@
 							<button pButton pRipple label="Modificar" icon="pi pi-pencil" class="p-button-success" routerLink="/admin/operativo/{{periodo.id}}"></button>
 						</td>
 						<td>
-							<span [class]="'customer-badge status-' + periodo.status">{{periodo.estado}}</span>
+							<p-inputSwitch [(ngModel)]="periodo.estado"></p-inputSwitch>
 						</td>
 					</tr>
 				</ng-template>

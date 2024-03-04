@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 import { PeriodoService } from '@app/core/services/periodo.service';
 import { Observable } from 'rxjs';
@@ -20,6 +21,7 @@ import { RouterModule } from '@angular/router';
 		TableModule,
 		ButtonModule,
 		InputTextModule,
+    InputSwitchModule,
 		RouterModule
   ],
   templateUrl: './periodo.component.html',

@@ -11,6 +11,7 @@ export const ADMIN_ROUTES: Routes = [
     {
         path:'',component:LayoutComponent,
         children:[
+            {path:'',component:DashboardComponent},
             {path:'dashboard',component:DashboardComponent},
             {path:'periodo',component:PeriodoComponent},
             {path:'operativo/:periodo_id',component:OperativoComponent},
