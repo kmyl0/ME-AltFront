@@ -1,1 +1,95 @@
-<p>operativo works!</p>
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>Registro de Fechas Operativos - Gestión Vigente </h5>
+			<p-table #dt1 [value]="operativos" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-between flex-column sm:flex-row">
+                        <div>
+                                <label htmlFor="gestion" >Seleccione Gestión: </label>
+                                <p-dropdown [options]="gestiones" optionLabel="gestion" [(ngModel)]="gestion" placeholder="Seleccione una Gestion"></p-dropdown>
+                        </div>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Nivel
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Área
+							</div>
+						</th>
+						<th style="min-width: 10rem">
+							<div class="flex justify-content-between align-items-center">
+								Nombre Operativo
+							</div>
+						</th>
+						<th style="min-width: 10rem">
+							<div class="flex justify-content-between align-items-center">
+								Fecha Inicio
+							</div>
+						</th>
+                        <th style="min-width: 10rem">
+							<div class="flex justify-content-between align-items-center">
+								Fecha Fin
+							</div>
+						</th>
+						<th style="min-width: 10rem">
+							<div class="flex justify-content-between align-items-center">
+								Opciones
+							</div>
+						</th>
+					</tr>
+				</ng-template>	
+				<ng-template pTemplate="body" let-operativo>
+					<tr>
+						<td>
+							{{operativo.descripcion_nivel}}
+						</td>
+						<td>
+							{{operativo.descripcion_area }}
+						</td>
+						<td>
+							{{operativo.nombre_operativo }}
+						</td>
+						<td>
+							{{operativo.fecha_inicio | date: 'MM/dd/yyyy'}}
+						</td>
+						<td>
+							{{operativo.fecha_fin | date: 'MM/dd/yyyy'}}
+						</td>
+						<td>
+                            <div class="flex flex-wrap gap-2">
+                                <button pButton pRipple label="Grabar" icon="pi pi-save" class="p-button-success p-button-sm mr-2 mb-2"></button>
+                                <button pButton pRipple label="Editar" icon="pi pi-pencil" class="p-button-sm mr-2 mb-2"></button>
+                                <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="p-button-danger p-button-sm mr-2 mb-2" ></button>
+                            </div>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No customers found.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Loading customers data. Please wait.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+		</div>
+
+	</div>
+
+	
+
+</div>

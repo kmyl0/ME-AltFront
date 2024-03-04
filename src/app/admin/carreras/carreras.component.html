@@ -1,1 +1,120 @@
-<p>carreras works!</p>
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>Registro de Carreras - ETA-PERMANENTE </h5>
+			<p-table #dt1 [value]="carreras" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-between flex-column sm:flex-row">
+                        <div>
+                            <button pButton pRipple (click)="display=true" label="Crear Carrera" icon="pi pi-save" class="p-button-success p-button-sm mr-2 mb-2"></button>
+                            <p-dialog header="Formulario de Registro de Carrera" [(visible)]="display" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
+                                <div class="card">
+                                    <div class="p-fluid p-formgrid grid">
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="areas">Seleccione Área</label>
+                                            <p-dropdown [options]="areas" optionLabel="abreviacion" [(ngModel)]="area" placeholder="Seleccione Área"></p-dropdown>
+                                        </div>
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="especialidades">Especialidad/Tipo</label>
+                                            <p-dropdown [options]="especialidades" optionLabel="descripcion" [(ngModel)]="especialidad" placeholder="Seleccione Especialidad"></p-dropdown>
+                                        </div>
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="firstname2">Cod-Mat</label>
+                                            <input pInputText id="firstname2" type="text" />
+                                        </div>
+                                        <div class="field col-12 md:col-6">
+                                            <label htmlFor="lastname2">Nombre Mat.</label>
+                                            <input pInputText id="lastname2" type="text" />
+                                        </div>
+                                        <div class="field col-12">
+                                            <label htmlFor="address">Descripción</label>
+                                            <input pInputTextarea id="address" rows="4" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <ng-template pTemplate="footer">
+                                        <button pButton icon="pi pi-save" (click)="display=false" label="Guardar" class="p-button-outlined p-button-success"></button>
+                                        <button pButton icon="pi pi-times" (click)="display=false" label="Cancelar" class="p-button-outlined p-button-danger"></button>
+                                </ng-template>
+                            </p-dialog>
+                        </div>
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+						</span>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Nivel
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Área
+							</div>
+						</th>
+						<th style="min-width: 10rem">
+							<div class="flex justify-content-between align-items-center">
+								Nombre Operativo
+							</div>
+						</th>
+						<th style="min-width: 10rem">
+							<div class="flex justify-content-between align-items-center">
+								Fecha Inicio
+							</div>
+						</th>
+                        <th style="min-width: 10rem">
+							<div class="flex justify-content-between align-items-center">
+								Fecha Fin
+							</div>
+						</th>
+						<th style="min-width: 10rem">
+							<div class="flex justify-content-between align-items-center">
+								Opciones
+							</div>
+						</th>
+					</tr>
+				</ng-template>	
+				<ng-template pTemplate="body" let-carrera>
+					<tr>
+						<td>
+							{{carrera.descripcion_area}}
+						</td>
+						<td>
+                            {{carrera.area_carrera_tipo }}
+                        </td>
+						<td>
+                            
+                        </td>
+						<td>
+                            {{carrera.denominacion }}
+						</td>
+						<td>
+                            <div class="flex flex-wrap gap-2">    
+                                <button pButton pRipple label="Equivalentes" icon="pi pi-trash" class="p-button-success p-button-sm mr-2 mb-2" ></button>
+                            </div>
+						</td>
+						<td>
+                            <div class="flex flex-wrap gap-2">
+                                <button pButton pRipple label="Editar" icon="pi pi-pencil" class="p-button-sm mr-2 mb-2"></button>
+                            </div>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No customers found.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Loading customers data. Please wait.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+		</div>
+	</div>
+</div>

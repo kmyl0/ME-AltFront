@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PeriodoResults } from '../models/periodo';
+import { CarreraResults } from '../models/carrera';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PeriodoService {
+export class CarreraService {
 
   constructor(private http:HttpClient) { 
   }
-  getPeriodosList():Observable<PeriodoResults>{
-    return this.http.get<PeriodoResults>('http://localhost:3000/gestionesPeriodosAll');
+  getCarreraList():Observable<CarreraResults>{
+    return this.http.get<CarreraResults>('http://localhost:3000/carrerasTipoAll');
      
   }
 
