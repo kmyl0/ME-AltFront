@@ -44,19 +44,6 @@ export class PeriodoComponent implements OnInit{
     
     this.periodoList$.subscribe(result => {this.customers1= result.data});
 
-
-
-
-    // this.customers1=[
-    //   {name:'aaaaa',date:'11/11/2021',status:'unqualified',balance:'101',area:'adadasdasd'},
-    //   {name:'bbbb',date:'11/11/2021',status:'qualified',balance:'101',area:'adadasdasd'},
-    //   {name:'cccc',date:'11/11/2021',status:'new',balance:'101',area:'adadasdasd'},
-    //   {name:'dddd',date:'11/11/2021',status:'negotiation',balance:'101',area:'adadasdasd'},
-    //   {name:'eeee',date:'11/11/2021',status:'renewal',balance:'101',area:'adadasdasd'},
-    //   {name:'ffff',date:'11/11/2021',status:'proposal',balance:'101',area:'adadasdasd'},
-    // ];
-
-
     this.statuses = [
         { label: 'Unqualified', value: 'unqualified' },
         { label: 'Qualified', value: 'qualified' },
