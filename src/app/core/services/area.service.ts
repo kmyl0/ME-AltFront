@@ -13,7 +13,7 @@ export class AreaService {
 
   getAreaList():Observable<AreaResults>{
    // return this.http.get<AreaResults>('http://localhost:3000/areaTipo');
-    return this.http.get<AreaResults>(environment.urlApi+'catalogos/areaTipo');
+    return this.http.get<AreaResults>(environment.urlApi+'catalogos-academico/areaTipo');
      
   }
 }

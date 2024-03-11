@@ -8,19 +8,22 @@
                 </div>
 
                 <div>
-                    <label for="username" class="block text-900 text-xl font-medium mb-2"></label>
-                    <input id="username" type="text" [(ngModel)]="username" placeholder="Usuario" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
-
-                    <label for="password" class="block text-900 font-medium text-xl mb-2"></label>
-                    <p-password id="password" [(ngModel)]="password" placeholder="Contraseña" [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
-
+                    <span class="p-float-label" >
+                        <input id="username" type="text" [(ngModel)]="username" pInputText class="w-full p-3 md:w-30rem" >
+                        <label for="username" class="block text-500 font-medium mb-2">Usuario</label>
+                    </span>
                     <div class="flex align-items-center justify-content-between mb-5 gap-5">
-                        <!-- <div class="flex align-items-center">
-                            <p-checkbox id="rememberme1" [binary]="true" styleClass="mr-2"></p-checkbox>
-                            <label for="rememberme1">Remember me</label>
-                        </div>
-                        <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a> -->
+                    
                     </div>
+                    <span class="p-float-label" >
+                        <p-password id="password" [(ngModel)]="password" [feedback]="false" [toggleMask]="true" inputStyleClass="w-full p-3 md:w-30rem"></p-password>
+                        <label for="password" class="block text-500 font-medium mb-2">Contraseña</label>
+                    </span>
+              
+                    <div class="flex align-items-center justify-content-between mb-5 gap-5">
+                       
+                    </div>
+                    
                     <button pButton pRipple label="Iniciar sesión" class="w-full p-3 text-xl" (click)="login()"></button>
                 </div>
             </div>

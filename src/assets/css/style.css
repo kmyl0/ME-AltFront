@@ -2,8 +2,26 @@
     width: 100%;
     height: 100% !important;
   }
+.layout-topbar{
+  background-color: #5070b4 !important;
+}
 
-
-.layout-topbar .layout-topbar-logo {
+.layout-topbar-logo {
     height: 70px;
 }
+
+.layout-topbar-button{
+   color: #ffffff !important; 
+}
+.layout-topbar-span{
+  color: #ffffff !important; 
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+
+.layout-topbar-button:hover {
+  color: #5070b4 !important;
+} 

@@ -13,7 +13,7 @@ export class OperativoService {
   }
   getOperativoByPeriodoList(periodo:number):Observable<OperativoResults>{
     //return this.http.get<OperativoResults>('http://172.20.196.191:3006/api/catalogos/gestionesPeriodosAll');
-    return this.http.get<OperativoResults>(environment.urlApi+ 'catalogos/fechasOperativosByGestionPeriodoId/'+periodo);
+    return this.http.get<OperativoResults>(environment.urlApi+ 'catalogos-academico/fechasOperativosByGestionPeriodoId/'+periodo);
      
   }
 }

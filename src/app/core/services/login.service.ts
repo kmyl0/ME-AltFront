@@ -1,20 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LoginResults } from '../models/login';
 import { Observable } from 'rxjs';
-import { PeriodoResults } from '../models/periodo';
 import { environment } from 'environments/environment';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class PeriodoService {
+export class LoginService {
 
   constructor(private http:HttpClient) { 
   }
-  getPeriodosList():Observable<PeriodoResults>{
-    return this.http.get<PeriodoResults>(environment.urlApi+ 'catalogos-academico/gestionesPeriodosAll');
-     
+  login(username:string, password:string):Observable<LoginResults>{
+    return this.http.post<LoginResults>(environment.urlApi+ 'auth/login',{username:username,password:password});
   }
-
+  
 }

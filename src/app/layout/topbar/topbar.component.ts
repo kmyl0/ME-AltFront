@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { LayoutService } from '@app/core/services/app.layout.service';
 import { MenuItem } from 'primeng/api';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -21,5 +21,12 @@ export class TopbarComponent {
 
   @ViewChild('topbarmenu') menu!: ElementRef;
 
-  constructor(public layoutService: LayoutService) { }
+  persona:any;
+  constructor(public layoutService: LayoutService,public router: Router) { 
+    this.persona = localStorage.getItem('persona');
+  }
+  logOut(){
+    localStorage.clear()
+    this.router.navigate(["/"]);
+  }
 }

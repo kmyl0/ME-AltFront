@@ -1,4 +1,4 @@
-<div class="layout-topbar" style="background-color: #5070b4;">
+<div class="layout-topbar" >
     <a class="layout-topbar-logo" routerLink="">
         <img src="assets/layout/images/{{layoutService.config().colorScheme === 'light' ? 'logo-minedu' : 'logo-minedu'}}.png" alt="logo" class="style-logo">  
     </a>
@@ -16,12 +16,13 @@
             <i class="pi pi-calendar"></i>
             <span>Calendar</span>
         </button> -->
+        <span class="layout-topbar-span">{{persona}}</span>
         <button class="p-link layout-topbar-button">
             <i class="pi pi-user"></i>
             <span>Perfil</span>
 
         </button>
-        <button class="p-link layout-topbar-button" [routerLink]="'/auth/access'">
+        <button class="p-link layout-topbar-button" (click)="logOut()">
             <i class="pi pi-sign-out"></i>
             <span>Salir</span>
         </button>

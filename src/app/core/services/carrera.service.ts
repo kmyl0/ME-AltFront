@@ -13,7 +13,7 @@ export class CarreraService {
   }
   getCarreraList():Observable<CarreraResults>{
     //return this.http.get<CarreraResults>('http://localhost:3000/carrerasTipoAll');
-    return this.http.get<CarreraResults>(environment.urlApi+ 'catalogos/carrerasTipoAll');
+    return this.http.get<CarreraResults>(environment.urlApi+ 'catalogos-academico/carrerasTipoAll');
      
   }
 
