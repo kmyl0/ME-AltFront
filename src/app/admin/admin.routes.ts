@@ -5,6 +5,7 @@ import { PeriodoComponent } from './periodo/periodo.component';
 import { OperativoComponent } from './operativo/operativo.component';
 import { DuracionComponent } from './duracion/duracion.component';
 import { CarrerasComponent } from './carreras/carreras.component';
+import { authGuard } from '@app/core/guards/auth.guard';
 
 
 export const ADMIN_ROUTES: Routes = [

@@ -11,7 +11,6 @@ export class EspecialidadService {
   constructor(private http:HttpClient) { 
   }
   getEspecialidadList():Observable<EspecialidadResults>{
-     //return this.http.get<OperativoResults>('http://172.20.196.191:3006/api/catalogos/especialidadTipo');
      return this.http.get<EspecialidadResults>(environment.urlApi+ 'catalogos-academico/especialidadTipo');
    
   }

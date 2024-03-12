@@ -38,6 +38,7 @@ export class MenuComponent implements OnInit{
             {
                 label: 'Configuración',
                 items: [
+                  { label: 'R.M.', icon: 'pi pi-fw pi-table', routerLink: ['/config/resolucion'] },
                   { label: 'Planes de Estudio (ETA)', icon: 'pi pi-fw pi-table', routerLink: ['/uikit/table'] },
                   { label: 'Registro Cursos (PERM)', icon: 'pi pi-fw pi-list', routerLink: ['/uikit/list'] },
                   ]

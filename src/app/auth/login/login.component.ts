@@ -6,9 +6,9 @@ import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { LayoutService } from '@app/core/services/app.layout.service';
 import { Router } from '@angular/router';
-import { LoginService } from '@app/core/services/login.service';
+import { UserService } from '@app/core/services/user.service';
 import { Observable } from 'rxjs';
-import { LoginResults } from '@app/core/models/login';
+import { UserResults } from '@app/core/models/user';
 
 @Component({
   selector: 'app-login',
@@ -26,14 +26,14 @@ import { LoginResults } from '@app/core/models/login';
 export class LoginComponent {
   password!: string;
   username!: string;
-  public loginRes!:Observable<LoginResults>;
+  public loginRes!:Observable<UserResults>;
 
-  constructor(public layoutService: LayoutService, public router: Router,private loginService:LoginService) { }
+  constructor(public layoutService: LayoutService, public router: Router,private userService:UserService) { }
 
   login() {
     
     if (this.username && this.password ) {
-      this.loginService.login(this.username,this.password)
+      this.userService.login(this.username,this.password)
       .subscribe(result => {
         console.log(result,result.statusCode);
         if(result.statusCode==200){
@@ -47,7 +47,6 @@ export class LoginComponent {
           console.log("Login error")
         }
       });
-     
     }else{
     }
   }
