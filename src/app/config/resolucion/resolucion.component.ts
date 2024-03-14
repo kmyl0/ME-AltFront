@@ -1,12 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CursoAcademico } from '@app/core/models/cursoacademico';
+import { Modulo } from '@app/core/models/modulo';
 import { ResolucionService } from '@app/core/services/resolucion.service';
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { Table, TableModule } from 'primeng/table';
+
+interface expandedRows {
+  [key: string]: boolean;
+}
 
 @Component({
   selector: 'app-resolucion',
@@ -18,7 +25,8 @@ import { Table, TableModule } from 'primeng/table';
     TableModule,
     InputSwitchModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    DialogModule
   ],
   templateUrl: './resolucion.component.html',
   styleUrl: './resolucion.component.scss'
@@ -28,18 +36,55 @@ export class ResolucionComponent implements OnInit{
   @ViewChild('filter') filter!: ElementRef;
 
   selectedRM: boolean = false;
-  constructor(private resolucionService:ResolucionService) { }
+
+  cursoAcademicoEspTitulo : string = "";
+  moduloTitulo : string = "";
+  
+  nivelesEPA: any[] = [];
+  nivelesESA: any[] = [];
+  nivelesETA: any[] = [];
+  modulos: any[] = [];
+  contenidos: any[] = [];
+  isExpanded: boolean = false;
+  loading: boolean = true;
+  expandedRows: expandedRows = {};
+  constructor(private resolucionService:ResolucionService) { 
+  
+  }
 
   ngOnInit():void{
 
     this.resolucionService.getResolucionesList()
-    .subscribe(result => {this.resoluciones= result.data});
+    .subscribe(result => {
+      this.resoluciones= result.data;
+      this.loading = false;
+    });
+
 
   }
 
   selectRM(resolucionId:number){
-    console.log(resolucionId);
     this.selectedRM = true;
+    this.resolucionService.getNivelesAcademicosByResolucionMinisterial(resolucionId)
+    .subscribe(result => { 
+      this.nivelesEPA=result.data.filter((nivel) => (nivel.nivel_academico_codigo==100));
+      this.nivelesESA=result.data.filter((nivel) => (nivel.nivel_academico_codigo==200));
+      this.nivelesETA=result.data.filter((nivel) => (nivel.nivel_academico_codigo!=100 && nivel.nivel_academico_codigo!=200));
+    });
+  }
+  verModulos(cursoAcademico:CursoAcademico){
+    
+    this.cursoAcademicoEspTitulo = cursoAcademico.especialidad_area+" - "+cursoAcademico.formacion_grado_estudio;
+    this.selectedRM = true;
+    this.resolucionService.getmodulosByCurso(cursoAcademico.curso_academico_id)
+    .subscribe(result => { this.modulos=result.data;});
+    //mostrar modal con los modulos del curso
+  }
+  verContenidosModulo(modulo:Modulo){
+    this.moduloTitulo = modulo.modulo;
+    this.resolucionService.getcontenidosByModulo(modulo.id)
+    .subscribe(result => { this.contenidos=result.data;});
+  
   }
 
   onGlobalFilter(table: Table, event: Event) {
@@ -50,4 +95,14 @@ export class ResolucionComponent implements OnInit{
     table.clear();
     this.filter.nativeElement.value = '';
   }
+  expandAllETA() {
+    
+    if (!this.isExpanded) {
+        this.nivelesETA.forEach(nivel => nivel && nivel.niveles_academicos ? this.expandedRows[nivel.niveles_academicos] = true : '');
+
+    } else {
+        this.expandedRows = {};
+    }
+    this.isExpanded = !this.isExpanded;
+}
 }

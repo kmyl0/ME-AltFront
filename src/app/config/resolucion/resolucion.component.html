@@ -113,19 +113,401 @@
             <h5>Detalle de Malla {{adasd}}</h5>
             <p-accordion>
                 <p-accordionTab header="EPA" class="line-height-3 m-0">
-
+					<div class="card">
+						<h5>Carreras</h5>
+						<!-- <p-toast></p-toast> -->
+						<p-table [value]="nivelesEPA" dataKey="niveles_academicos" [expandedRowKeys]="expandedRows" responsiveLayout="scroll">
+							<ng-template pTemplate="caption">
+								<button pButton icon="pi pi-fw {{isExpanded ? 'pi-minus' : 'pi-plus'}}" label="{{isExpanded ? 'Cerrar Todo' : 'Ver Todo'}}" (click)="expandAllETA()"></button>
+								<div class="flex table-header">
+								</div>
+							</ng-template>
+							<ng-template pTemplate="header">
+								<tr>
+									<th style="width: 3rem"></th>
+									<th>Nivel Académico</th>
+								</tr>
+							</ng-template>
+							<ng-template pTemplate="body" let-nivel let-expanded="expanded">
+								<tr>
+									<td>
+										<button type="button" pButton pRipple [pRowToggler]="nivel" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+									</td>
+									<td style="min-width: 12rem;">{{nivel.niveles_academicos}}</td>
+								</tr>
+							</ng-template>
+							<ng-template pTemplate="rowexpansion" let-nivel>
+								<tr>
+									<td colspan="2">
+										<div class="p-3">
+											<p-table [value]="nivel.carreras" dataKey="niveles_academicos" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" responsiveLayout="scroll">
+											<!-- <p-table [value]="resoluciones" dataKey="id"   [globalFilterFields]="['resolucion_ministerial','codigo','descripcion']" responsiveLayout="scroll"> -->
+				
+												<ng-template pTemplate="header">
+													<tr>
+														<th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+														<th pSortableColumn="especialidad_area">Area<p-sortIcon field="especialidad_area"></p-sortIcon></th>
+														<th pSortableColumn="formacion_grado_estudio">Grado <p-sortIcon field="formacion_grado_estudio"></p-sortIcon></th>
+														<th pSortableColumn="niveles_academicos">Nivel<p-sortIcon field="niveles_academicos"></p-sortIcon></th>
+														<th >Opciones</th>
+													</tr>
+												</ng-template>
+												<ng-template pTemplate="body" let-carrera>
+													<tr>
+														<td>{{carrera.id}}</td>
+														<td>{{carrera.especialidad_area}}</td>
+														<td>{{carrera.formacion_grado_estudio}}</td>
+														<td>{{carrera.niveles_academicos}}</td>
+														<td>
+															<button pButton pRipple label="Módulos" (click)="verModulos(carrera);display=true" icon="pi pi-search" class="p-button-success" ></button>
+													</tr>
+												</ng-template>
+												<ng-template pTemplate="emptymessage">
+													<tr>
+														<td colspan="6">No existen Curso registrados.</td>
+													</tr>
+												</ng-template>
+											</p-table>
+										</div>
+									</td>
+								</tr>
+							</ng-template>
+						</p-table>
+					</div>
                     
                 </p-accordionTab>
                 <p-accordionTab header="ESA" class="line-height-3 m-0">
-                   
+					<div class="card">
+						<h5>Carreras</h5>
+						<!-- <p-toast></p-toast> -->
+						<p-table [value]="nivelesESA" dataKey="niveles_academicos" [expandedRowKeys]="expandedRows" responsiveLayout="scroll">
+							<ng-template pTemplate="caption">
+								<button pButton icon="pi pi-fw {{isExpanded ? 'pi-minus' : 'pi-plus'}}" label="{{isExpanded ? 'Cerrar Todo' : 'Ver Todo'}}" (click)="expandAllETA()"></button>
+								<div class="flex table-header">
+								</div>
+							</ng-template>
+							<ng-template pTemplate="header">
+								<tr>
+									<th style="width: 3rem"></th>
+									<th>Nivel Académico</th>
+								</tr>
+							</ng-template>
+							<ng-template pTemplate="body" let-nivel let-expanded="expanded">
+								<tr>
+									<td>
+										<button type="button" pButton pRipple [pRowToggler]="nivel" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+									</td>
+									<td style="min-width: 12rem;">{{nivel.niveles_academicos}}</td>
+								</tr>
+							</ng-template>
+							<ng-template pTemplate="rowexpansion" let-nivel>
+								<tr>
+									<td colspan="2">
+										<div class="p-3">
+											<p-table [value]="nivel.carreras" dataKey="niveles_academicos" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" responsiveLayout="scroll">
+											<!-- <p-table [value]="resoluciones" dataKey="id"   [globalFilterFields]="['resolucion_ministerial','codigo','descripcion']" responsiveLayout="scroll"> -->
+				
+												<ng-template pTemplate="header">
+													<tr>
+														<th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+														<th pSortableColumn="especialidad_area">Area<p-sortIcon field="especialidad_area"></p-sortIcon></th>
+														<th pSortableColumn="formacion_grado_estudio">Grado <p-sortIcon field="formacion_grado_estudio"></p-sortIcon></th>
+														<th pSortableColumn="niveles_academicos">Nivel<p-sortIcon field="niveles_academicos"></p-sortIcon></th>
+														<th >Opciones</th>
+													</tr>
+												</ng-template>
+												<ng-template pTemplate="body" let-carrera>
+													<tr>
+														<td>{{carrera.id}}</td>
+														<td>{{carrera.especialidad_area}}</td>
+														<td>{{carrera.formacion_grado_estudio}}</td>
+														<td>{{carrera.niveles_academicos}}</td>
+														<td>
+															<button pButton pRipple label="Módulos" (click)="verModulos(carrera);display=true" icon="pi pi-search" class="p-button-success" ></button>
+													</tr>
+												</ng-template>
+												<ng-template pTemplate="emptymessage">
+													<tr>
+														<td colspan="6">No existen Curso registrados.</td>
+													</tr>
+												</ng-template>
+											</p-table>
+										</div>
+									</td>
+								</tr>
+							</ng-template>
+						</p-table>
+					</div>
                 </p-accordionTab>
                 <p-accordionTab header="ETA" class="line-height-3 m-0">
-                    
+                    <div class="card">
+						<h5>Carreras</h5>
+						<!-- <p-toast></p-toast> -->
+						<p-table [value]="nivelesETA" dataKey="niveles_academicos" [expandedRowKeys]="expandedRows" responsiveLayout="scroll">
+							<ng-template pTemplate="caption">
+								<button pButton icon="pi pi-fw {{isExpanded ? 'pi-minus' : 'pi-plus'}}" label="{{isExpanded ? 'Cerrar Todo' : 'Ver Todo'}}" (click)="expandAllETA()"></button>
+								<div class="flex table-header">
+								</div>
+							</ng-template>
+							<ng-template pTemplate="header">
+								<tr>
+									<th style="width: 3rem"></th>
+									<th>Nivel Académico</th>
+								</tr>
+							</ng-template>
+							<ng-template pTemplate="body" let-nivel let-expanded="expanded">
+								<tr>
+									<td>
+										<button type="button" pButton pRipple [pRowToggler]="nivel" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+									</td>
+									<td style="min-width: 12rem;">{{nivel.niveles_academicos}}</td>
+								</tr>
+							</ng-template>
+							<ng-template pTemplate="rowexpansion" let-nivel>
+								<tr>
+									<td colspan="2">
+										<div class="p-3">
+											<p-table [value]="nivel.carreras" dataKey="niveles_academicos" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" responsiveLayout="scroll">
+											<!-- <p-table [value]="resoluciones" dataKey="id"   [globalFilterFields]="['resolucion_ministerial','codigo','descripcion']" responsiveLayout="scroll"> -->
+				
+												<ng-template pTemplate="header">
+													<tr>
+														<th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+														<th pSortableColumn="especialidad_area">Area<p-sortIcon field="especialidad_area"></p-sortIcon></th>
+														<th pSortableColumn="formacion_grado_estudio">Grado <p-sortIcon field="formacion_grado_estudio"></p-sortIcon></th>
+														<th pSortableColumn="niveles_academicos">Nivel<p-sortIcon field="niveles_academicos"></p-sortIcon></th>
+														<th >Opciones</th>
+													</tr>
+												</ng-template>
+												<ng-template pTemplate="body" let-carrera>
+													<tr>
+														<td>{{carrera.id}}</td>
+														<td>{{carrera.especialidad_area}}</td>
+														<td>{{carrera.formacion_grado_estudio}}</td>
+														<td>{{carrera.niveles_academicos}}</td>
+														<td>
+															<button pButton pRipple label="Módulos" (click)="verModulos(carrera);display=true" icon="pi pi-search" class="p-button-success" ></button>
+													</tr>
+												</ng-template>
+												<ng-template pTemplate="emptymessage">
+													<tr>
+														<td colspan="6">No existen Curso registrados.</td>
+													</tr>
+												</ng-template>
+											</p-table>
+										</div>
+									</td>
+								</tr>
+							</ng-template>
+						</p-table>
+					</div>
                 </p-accordionTab>
             </p-accordion>
         </div>
     </div>
     }
-
-
 </div>
+
+
+<p-dialog header="Listado de Modulos de Carrera {{cursoAcademicoEspTitulo}}" [(visible)]="display" [modal]="true" showEffect="fade" [style]="{width: '43vw'}" [breakpoints]="{'960px': '75vw'}">
+	<div class="card">
+		<!-- <div class="p-fluid p-formgrid grid"> -->
+			
+			<p-table #dt2 [value]="modulos" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines"   [paginator]="true" [globalFilterFields]="['modulo','obs','sigla']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<!-- <button pButton label="Limpiar" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button> -->
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt2, $event)" placeholder="Buscar..." class="w-full"/>
+						</span>
+						<button pButton pRipple label="Agregar Modulo" icon="pi pi-save" class="p-button-success p-button-sm mr-2 mb-2" (click)="displayModuloReg=true"></button>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Sigla
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Modulo
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Contenido
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Vigente
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Opciones
+							</div>
+						</th>
+					</tr>
+				</ng-template>	
+				<ng-template pTemplate="body" let-modulo>
+					<tr>
+						<td>
+							{{modulo.sigla}}
+						</td>
+						<td>
+							{{modulo.modulo}}
+						</td>
+						<td>
+							{{modulo.contenido}}
+						</td>
+						<td>
+							<p-inputSwitch [(ngModel)]="modulo.esVigente"></p-inputSwitch>
+						</td>
+                        <td>
+							<button pButton pRipple label="Contenidos" (click)="verContenidosModulo(modulo);displayContenidos=true" icon="pi pi-eye" class="p-button-success" ></button>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No se encontro Modulos.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Cargando modulos. Espere por favor.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+		
+		<!-- </div> -->
+	</div>
+	<ng-template pTemplate="footer">
+			<!-- <button pButton icon="pi pi-save" (click)="display=false" label="Guardar" class="p-button-outlined p-button-success"></button> -->
+			<button pButton icon="pi pi-times" (click)="display=false" label="Cerrar" class="p-button-outlined p-button-danger"></button>
+	</ng-template>
+</p-dialog>
+
+
+<p-dialog header="Listado de Contenidos de Modulo {{moduloTitulo}}" [(visible)]="displayContenidos" [modal]="true" showEffect="fade" [style]="{width: '44vw'}" [breakpoints]="{'960px': '75vw'}">
+	<div class="card">
+			<p-table #dt3 [value]="contenidos" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines"   [paginator]="true" [globalFilterFields]="['sigla_contenido','contenido']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption">
+					<div class="flex justify-content-between flex-column sm:flex-row">
+						<!-- <button pButton label="Limpiar" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button> -->
+						<span class="p-input-icon-left mb-2">
+							<i class="pi pi-search"></i>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt3, $event)" placeholder="Buscar..." class="w-full"/>
+						</span>
+						<button pButton pRipple label="Agregar Contenido" icon="pi pi-save" class="p-button-success p-button-sm mr-2 mb-2"></button>
+					</div>
+				</ng-template>
+				<ng-template pTemplate="header">
+					<tr>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Sigla
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Contenido
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Fecha Inicio
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Fecha Fin
+							</div>
+						</th>
+						<th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Vigente
+							</div>
+						</th>
+                        <th style="min-width: 12rem">
+							<div class="flex justify-content-between align-items-center">
+								Opciones
+							</div>
+						</th>
+					</tr>
+				</ng-template>	
+				<ng-template pTemplate="body" let-contenido>
+					<tr>
+						<td>
+							{{contenido.sigla_contenido}}
+						</td>
+						<td>
+							{{contenido.contenido}}
+						</td>
+						<td>
+							{{contenido.fecha_inicio}}
+						</td>
+						<td>
+							{{contenido.fecha_fin}}
+						</td>
+						<td>
+							<p-inputSwitch [(ngModel)]="contenido.esactivo"></p-inputSwitch>
+						</td>
+                        <td>
+							<!-- <button pButton pRipple label="Contenidos" (click)="contenidosModulo(modulo.id)" icon="pi pi-eye" class="p-button-success" ></button> -->
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No se encontro Contenidos.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Cargando contenidos. Espere por favor.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+
+	</div>
+	<ng-template pTemplate="footer">
+			<!-- <button pButton icon="pi pi-save" (click)="display=false" label="Guardar" class="p-button-outlined p-button-success"></button> -->
+			<button pButton icon="pi pi-times" (click)="displayContenidos=false" label="Cerrar" class="p-button-outlined p-button-danger"></button>
+	</ng-template>
+</p-dialog>
+
+<p-dialog header="Formulario de Registro de Modulo" [(visible)]="displayModuloReg" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
+	<div class="card">
+		<div class="p-fluid p-formgrid grid">
+			<div class="field col-12 md:col-6">
+				<label htmlFor="areas">Seleccione Área</label>
+				<!-- <p-dropdown [options]="areas" optionLabel="abreviacion" [(ngModel)]="area" placeholder="Seleccione Área"></p-dropdown> -->
+			</div>
+			<div class="field col-12 md:col-6">
+				<label htmlFor="especialidades">Especialidad/Tipo</label>
+				<!-- <p-dropdown [options]="especialidades" optionLabel="descripcion" [(ngModel)]="especialidad" placeholder="Seleccione Especialidad"></p-dropdown> -->
+			</div>
+			<div class="field col-12 md:col-6">
+				<label htmlFor="firstname2">Cod-Mat</label>
+				<input pInputText id="firstname2" type="text" />
+			</div>
+			<div class="field col-12 md:col-6">
+				<label htmlFor="lastname2">Nombre Mat.</label>
+				<input pInputText id="lastname2" type="text" />
+			</div>
+			<div class="field col-12">
+				<label htmlFor="address">Descripción</label>
+				<input pInputTextarea id="address" rows="4" />
+			</div>
+		</div>
+	</div>
+	<ng-template pTemplate="footer">
+			<button pButton icon="pi pi-save" (click)="displayModuloReg=false" label="Guardar" class="p-button-outlined p-button-success"></button>
+			<button pButton icon="pi pi-times" (click)="displayModuloReg=false" label="Cancelar" class="p-button-outlined p-button-danger"></button>
+	</ng-template>
+</p-dialog>
