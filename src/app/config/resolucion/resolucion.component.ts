@@ -3,6 +3,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CursoAcademico } from '@app/core/models/cursoacademico';
 import { Modulo } from '@app/core/models/modulo';
+import { NivelAcademicoResults } from '@app/core/models/nivelacademico';
+import { ResolucionResults } from '@app/core/models/resolucion';
 import { ResolucionService } from '@app/core/services/resolucion.service';
 import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
@@ -10,6 +12,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { Table, TableModule } from 'primeng/table';
+import { Observable, catchError, delay } from 'rxjs';
 
 interface expandedRows {
   [key: string]: boolean;
@@ -32,7 +35,9 @@ interface expandedRows {
   styleUrl: './resolucion.component.scss'
 })
 export class ResolucionComponent implements OnInit{
-  resoluciones:any[] = [];
+  //resoluciones:any[] = [];
+  resoluciones$!:Observable<ResolucionResults> ;
+  public hasError: boolean = false;
   @ViewChild('filter') filter!: ElementRef;
 
   selectedRM: boolean = false;
@@ -46,7 +51,7 @@ export class ResolucionComponent implements OnInit{
   modulos: any[] = [];
   contenidos: any[] = [];
   isExpanded: boolean = false;
-  loading: boolean = true;
+  loading: boolean = false;
   expandedRows: expandedRows = {};
   constructor(private resolucionService:ResolucionService) { 
   
@@ -54,12 +59,13 @@ export class ResolucionComponent implements OnInit{
 
   ngOnInit():void{
 
-    this.resolucionService.getResolucionesList()
-    .subscribe(result => {
-      this.resoluciones= result.data;
-      this.loading = false;
-    });
-
+    // this.resolucionService.getResolucionesList()
+    // .subscribe(result => {
+    //   this.resoluciones= result.data;
+    // });
+    this.resoluciones$ =  this.resolucionService.getResolucionesList()
+  
+   // this.loading = false;
 
   }
 

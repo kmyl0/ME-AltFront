@@ -2,13 +2,13 @@
 	<div class="col-12">
 		<div class="card">
 			<h5>Resoluciones Ministeriales </h5>
-			<p-table #dt1 [value]="resoluciones" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['resolucion_ministerial','codigo','descripcion']" responsiveLayout="scroll">
-				<ng-template pTemplate="caption">
+			<p-table #dt1 *ngIf="resoluciones$ | async as resoluciones ; else loader " [value]="resoluciones.data" dataKey="id" [rows]="10" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['resolucion_ministerial','codigo','descripcion']" responsiveLayout="scroll">
+				<ng-template pTemplate="caption" >
 					<div class="flex justify-content-between flex-column sm:flex-row">
 						<!-- <button pButton label="Limpiar" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button> -->
 						<span class="p-input-icon-left mb-2">
 							<i class="pi pi-search"></i>
-							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+							<input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Buscar..." class="w-full"/>
 						</span>
 						<button pButton pRipple label="Agregar Resolución" icon="pi pi-save" class="p-button-success p-button-sm mr-2 mb-2"></button>
 					</div>
@@ -97,12 +97,13 @@
 						<td colspan="8">No se encontro Resoluciones.</td>
 					</tr>
 				</ng-template>
-				<ng-template pTemplate="loadingbody">
+				<!-- <ng-template pTemplate="loadingbody">
 					<tr>
-						<td colspan="8">Cargando resoluciobnes. Espere por favor.</td>
+						<td colspan="8">Cargando resoluciones. Espere por favor.</td>
 					</tr>
-				</ng-template>
+				</ng-template> -->
     		</p-table>
+			<ng-template #loader>Cargando resoluciones. Espere por favor.</ng-template>
 		</div>
 
 	</div>
@@ -170,6 +171,11 @@
 											</p-table>
 										</div>
 									</td>
+								</tr>
+							</ng-template>
+							<ng-template pTemplate="emptymessage">
+								<tr>
+									<td colspan="8">No se encontro Información.</td>
 								</tr>
 							</ng-template>
 						</p-table>
