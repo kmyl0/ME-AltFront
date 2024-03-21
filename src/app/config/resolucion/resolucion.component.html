@@ -111,17 +111,24 @@
     @if(selectedRM) {
     <div class="col-12 md:col-12" > 
         <div class="card">
-            <h5>Detalle de Malla {{adasd}}</h5>
+			<!-- <ng-template pTemplate="caption" >
+			</ng-template> -->
+				<div class="flex justify-content-between flex-column sm:flex-row">
+					<!-- <button pButton label="Limpiar" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button> -->
+					<h5>Detalle de Malla {{adasd}}</h5>
+					<button pButton pRipple label="Agregar Carrera" (click)="displayCarreraReg=true" icon="pi pi-save" class="p-button-success p-button-sm mr-2 mb-2"></button>
+				</div>
+		
             <p-accordion>
                 <p-accordionTab header="EPA" class="line-height-3 m-0">
 					<div class="card">
 						<h5>Carreras</h5>
-						<!-- <p-toast></p-toast> -->
 						<p-table [value]="nivelesEPA" dataKey="niveles_academicos" [expandedRowKeys]="expandedRows" responsiveLayout="scroll">
 							<ng-template pTemplate="caption">
 								<button pButton icon="pi pi-fw {{isExpanded ? 'pi-minus' : 'pi-plus'}}" label="{{isExpanded ? 'Cerrar Todo' : 'Ver Todo'}}" (click)="expandAllETA()"></button>
-								<div class="flex table-header">
+								<!-- <div class="flex table-header">
 								</div>
+								 -->
 							</ng-template>
 							<ng-template pTemplate="header">
 								<tr>
@@ -515,5 +522,42 @@
 	<ng-template pTemplate="footer">
 			<button pButton icon="pi pi-save" (click)="displayModuloReg=false" label="Guardar" class="p-button-outlined p-button-success"></button>
 			<button pButton icon="pi pi-times" (click)="displayModuloReg=false" label="Cancelar" class="p-button-outlined p-button-danger"></button>
+	</ng-template>
+</p-dialog>
+
+<p-dialog header="Formulario de Registro de Carrera" [(visible)]="displayCarreraReg" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
+	<div class="card">
+		<div class="p-fluid p-formgrid grid">
+			<div class="field col-12 md:col-6">
+				<label htmlFor="areas">Seleccione Área</label>
+				<p-dropdown [options]="areas" optionLabel="abreviacion" [(ngModel)]="area" placeholder="Seleccione Área"></p-dropdown>
+			</div>
+			<div class="field col-12 md:col-6">
+				<label htmlFor="especialidades">Especialidad/Tipo</label>
+				<p-dropdown [options]="especialidades" optionLabel="descripcion" [(ngModel)]="especialidad" placeholder="Seleccione Especialidad"></p-dropdown>
+			</div>
+			<div class="field col-12 md:col-6">
+				<label htmlFor="firstname2">Cod-Mat</label>
+				<input pInputText id="firstname2" type="text" />
+			</div>
+			<div class="field col-12 md:col-6">
+				<label htmlFor="lastname2">Nombre Mat.</label>
+				<input pInputText id="lastname2" type="text" />
+			</div>
+			<div class="field col-12">
+				<label htmlFor="address">Descripción</label>
+				<input pInputTextarea id="address" rows="4" />
+			</div> 
+			<div class="field col-12">
+				<div class="field-checkbox">
+					<p-checkbox name="group1" value="New York" [(ngModel)]="valCheck" id="ny"></p-checkbox>
+					<label for="ny">New York</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ng-template pTemplate="footer">
+			<button pButton icon="pi pi-save" (click)="display=false" label="Guardar" class="p-button-outlined p-button-success"></button>
+			<button pButton icon="pi pi-times" (click)="display=false" label="Cancelar" class="p-button-outlined p-button-danger"></button>
 	</ng-template>
 </p-dialog>
